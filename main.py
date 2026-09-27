@@ -5,6 +5,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from numpy import mgrid 
 from pygenec.selecao.roleta import Roleta
 from pygenec.selecao.classificacao import Classificacao
+from pygenec.selecao.torneio import Torneio
 from numpy import unique
 
 def func(x, y):
@@ -41,10 +42,12 @@ populacao = Populacao(avaliacao, cromossos_totais, tamanho_populacao)
 populacao.gerar_populacao()
 #roleta = Roleta(populacao)
 #pop = roleta.selecao(10)
-classificacao = Classificacao(populacao)
-pop = classificacao.selecao(10)
 
+#classificacao = Classificacao(populacao)
+#pop = classificacao.selecao(10)
 
+torneio = Torneio(populacao)
+pop = torneio.selecao(10)
 x, y = xy(pop)
 
 fig = plt.figure(figsize=(100,100))
