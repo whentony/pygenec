@@ -7,6 +7,7 @@ from pygenec.selecao.roleta import Roleta
 from pygenec.selecao.classificacao import Classificacao
 from pygenec.selecao.torneio import Torneio
 from numpy import unique
+from pygenec.cruzamento.kpontos import KPontos
 
 def func(x, y):
     tmp = 3 * exp(-(y+1) **2 - x **2)*(x-1) **2 \
@@ -47,7 +48,11 @@ populacao.gerar_populacao()
 #pop = classificacao.selecao(10)
 
 torneio = Torneio(populacao)
-pop = torneio.selecao(10)
+subpopulacao = torneio.selecao(10)
+
+kpontos = KPontos(tamanho_populacao)
+pop = kpontos.descendentes(subpopulacao, pcruz=0.5)
+
 x, y = xy(pop)
 
 fig = plt.figure(figsize=(100,100))

@@ -1,6 +1,9 @@
 from numpy import array
 from numpy.random import randint, random
 
+class NoCompatibleIndividualSize(Exception):
+    pass
+
 class Cruzamento:
     """
     Class abstrata representando o cruzamento.
@@ -29,16 +32,20 @@ class Cruzamento:
         npop = len(subpopulacao)
         
         while(len(nova_populacao) < self.tamanho_populacao):
-            i = randint(0, npop - 1)
-            j = randint(0, npop - 1)
-            while j == i:
-                j = randint(0, npop - 1)
+            i = randint(0, npop)
+            j = randint(0, npop)
+            while j == i and npop > 1:
+                j = randint(0, npop)
                 
             cruzar = random()
             if cruzar < pcruz:
                 desc1, desc2 = self.cruzamento(subpopulacao[i], subpopulacao[j])
-                nova_populacao.append(desc1)
-                if len(nova_populacao) < self.tamanho_populacao:
-                    nova_populacao.append(desc2)
+            else:
+                desc1 = subpopulacao[i].copy()
+                desc2 = subpopulacao[j].copy()
+
+            nova_populacao.append(desc1)
+            if len(nova_populacao) < self.tamanho_populacao:
+                nova_populacao.append(desc2)
 
         return array(nova_populacao)

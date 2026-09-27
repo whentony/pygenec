@@ -1,7 +1,7 @@
 from numpy.random import randint
 from numpy import array
 
-from .cruzamento import NotCompatibleIndividualSize, Cruzamento
+from .cruzamento import NoCompatibleIndividualSize, Cruzamento
 
 class UmPonto(Cruzamento):
     """
@@ -27,9 +27,9 @@ class UmPonto(Cruzamento):
         n2 = len(progenitor2)
         if n1 != n2:
             msg = "Tamanho ind1 {0} diferente do tamanho ind2 {1}".format(n1, n2)
-            raise NotCompatibleIndividualSize(msg)
+            raise NoCompatibleIndividualSize(msg)
 
-        ponto = randint(1, n1 -1)
+        ponto = randint(1, n1)
         desc1 = progenitor1.copy()
         desc2 = progenitor2.copy()
 
