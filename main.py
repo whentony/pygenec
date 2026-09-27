@@ -3,6 +3,8 @@ from pygenec.populacao import Populacao
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from numpy import mgrid 
+from pygenec.selecao.roleta import Roleta
+from numpy import unique
 
 def func(x, y):
     tmp = 3 * exp(-(y+1) **2 - x **2)*(x-1) **2 \
@@ -32,19 +34,27 @@ def avaliacao(populacao):
     return tmp
 
 cromossos_totais = 8
-tamanho_populacao = 5
+tamanho_populacao = 100
 
 populacao = Populacao(avaliacao, cromossos_totais, tamanho_populacao)
 populacao.gerar_populacao()
-populacao.avaliar()
+roleta = Roleta(populacao)
+pop = roleta.selecao(10)
 
-x, y = xy(populacao.populacao)
+
+x, y = xy(pop)
 
 fig = plt.figure(figsize=(100,100))
 ax = fig.add_subplot(111, projection='3d')
 X, Y = mgrid[-3:3:30j, -3:3:30j]
 Z = func(X, Y)
 
+print("Total selecionado:", len(pop))                  # 10
+print("Indivíduos únicos:", len(unique(pop, axis=0)))  # 9
+
 ax.plot_wireframe(X, Y, Z)
 ax.scatter(x, y, func(x, y), s=50, c='red', marker='D')
 plt.show()
+
+
+
