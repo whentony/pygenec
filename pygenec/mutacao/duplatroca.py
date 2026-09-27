@@ -22,7 +22,7 @@ class DuplaTroca(Mutacao):
         Alteração genética de membros da população usando mutação dupla troca.
         """
         nmut = self.selecao()
-        gen1 = array([randint(0, self.ngen - 1)])
-        gen2 = array([randint(0, self.ngen - 1)])
-        
-        self.populacao[nmut, gen1], self.populacao[nmut, gen2] = self.populacao[nmut, gen2], self.populacao[nmut, gen1]
+        if len(nmut) > 0:
+            gen1 = array([randint(0, self.ngen) for _ in range(len(nmut))], dtype=int)
+            gen2 = array([randint(0, self.ngen) for _ in range(len(nmut))], dtype=int)
+            self.populacao[nmut, gen1], self.populacao[nmut, gen2] = self.populacao[nmut, gen2], self.populacao[nmut, gen1]

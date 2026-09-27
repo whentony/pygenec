@@ -22,12 +22,12 @@ class SequenciaReversa(Mutacao):
         Alteração genética de membros da população usando mutação sequência reversa.
         """
         nmut = self.selecao()
-        if nmut.size != 0:
+        if len(nmut) > 0:
             for k in nmut:
-                i = randint(0, self.ngen - 1)
-                j = randint(0, self.ngen - 1)
+                i = randint(0, self.ngen)
+                j = randint(0, self.ngen)
                 while i == j:
-                    j = randint(0, self.ngen - 1)
+                    j = randint(0, self.ngen)
                 if i > j:
                     i, j = j, i
                 self.populacao[k, i:j] = self.populacao[k, i:j][::-1]

@@ -22,5 +22,6 @@ class Flip(Mutacao):
         Alteração genética de membros da população usando mutação flip.
         """
         nmut = self.selecao()
-        genflip = array([randint(0, self.ngen - 1) for _ in range(len(nmut))])
-        self.populacao[nmut, genflip] = 1 - self.populacao[nmut, genflip]
+        if len(nmut) > 0:
+            genflip = array([randint(0, self.ngen) for _ in range(len(nmut))], dtype=int)
+            self.populacao[nmut, genflip] = 1 - self.populacao[nmut, genflip]

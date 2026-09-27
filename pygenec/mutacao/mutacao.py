@@ -23,7 +23,7 @@ class Mutacao:
         return self._populacao
     
     def selecao(self):
-        nmut = array([i for i in range(self.npop) if random() < self.pmut])
+        nmut = array([i for i in range(self.npop) if random() < self.pmut], dtype=int)
         return nmut
     
     def mutacao(self):

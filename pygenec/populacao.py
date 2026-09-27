@@ -33,7 +33,6 @@ class Populacao:
     def gerar_populacao(self):
         """Gerador aleatório de população"""
         self.populacao = randint(0, 2, size=(self.tamanho_populacao, self.genes_totais), dtype='b')
-        print(self.populacao)
         
     def avaliar(self):
         """Avalia e ordena a populacao"""
