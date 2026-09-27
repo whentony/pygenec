@@ -1,0 +1,46 @@
+#!/usr/bin/env python3.6
+# -*- Coding: UTF-8 -*-
+"""
+Gerador Aleatório de População
+
+Programa sob licença GNU V.3.
+Desenvolvido por: E. S. Pereira
+Versão 0.0.1.
+"""
+
+from numpy.random import randint
+from numpy import argsort, unique
+
+class Populacao:
+    """
+    Cria e avalia uma população.
+    Recebe como entrada:
+        avaliacao  - Função que recebe um indíviduo como entrada e retorna
+        um valor numérico.
+        
+        cromossomos_totais - Número inteiro representando o tamanho da cadeia
+        genética do indivíduo.
+        
+        tamanha_populacao - Número inteiro representando o número total  de indivíduos na
+        população.
+    """
+    
+    def __init__(self, avaliacao, genes_totais, tamanha_populacao):
+        self.avaliacao = avaliacao
+        self.genes_totais = genes_totais
+        self.tamanho_populacao = tamanha_populacao
+        
+    def gerar_populacao(self):
+        """Gerador aleatório de população"""
+        self.populacao = randint(0, 2, size=(self.tamanho_populacao, self.genes_totais), dtype='b')
+        
+        
+    def avaliar(self):
+        """Avalia e ordena a populacao"""
+        u, indices = unique(self.populacao, return_inverse=True, axis=0)
+        valores = self.avaliacao(u)
+        valores = valores[indices]
+        ind = argsort(valores)
+        self.populacao[:] = self.populacao[ind]
+        return valores[ind]
+
