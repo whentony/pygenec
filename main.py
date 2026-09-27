@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from numpy import mgrid 
 from pygenec.selecao.roleta import Roleta
+from pygenec.selecao.classificacao import Classificacao
 from numpy import unique
 
 def func(x, y):
@@ -38,8 +39,10 @@ tamanho_populacao = 100
 
 populacao = Populacao(avaliacao, cromossos_totais, tamanho_populacao)
 populacao.gerar_populacao()
-roleta = Roleta(populacao)
-pop = roleta.selecao(10)
+#roleta = Roleta(populacao)
+#pop = roleta.selecao(10)
+classificacao = Classificacao(populacao)
+pop = classificacao.selecao(10)
 
 
 x, y = xy(pop)
